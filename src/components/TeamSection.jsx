@@ -1,5 +1,4 @@
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useState } from "react";
+import React from "react";
 
 export default function TeamSection() {
   const team = [
@@ -20,52 +19,43 @@ export default function TeamSection() {
     },
   ];
 
-  const [index, setIndex] = useState(0);
-
-  const prev = () => setIndex((index - 1 + team.length) % team.length);
-  const next = () => setIndex((index + 1) % team.length);
-
   return (
     <section className="bg-[#FFF7D1] py-16">
       <div className="max-w-7xl mx-auto px-6">
         
-        <h2 className="text-center text-2xl font-bold mb-8">
+        <h2 className="text-center text-2xl font-bold mb-10">
           Building Uplers Hiring Platform: <span className="text-gray-700">The AI Evolution</span>
         </h2>
 
-        <div className="relative max-w-xl mx-auto">
-          
-          <div className="bg-white p-6 rounded-xl shadow-lg relative">
+        {/* Grid layout to show all items in one line on medium screens and up */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {team.map((member) => (
+            <div key={member.name} className="bg-white p-4 rounded-xl shadow-lg flex flex-col">
+              {/* Image Container */}
+              <div className="bg-yellow-400 rounded-xl overflow-hidden mb-4">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-64 object-cover object-top"
+                />
+              </div>
 
-            {/* Image */}
-            <img
-              src={team[index].img}
-              alt={team[index].name}
-              className="w-full rounded-xl mb-4"
-            />
-
-            {/* Name + Role */}
-            <h3 className="font-bold text-gray-900">{team[index].name}</h3>
-            <p className="text-gray-600 text-sm">{team[index].role}</p>
-
-            {/* Prev Button */}
-            <button
-              onClick={prev}
-              className="absolute left-[-20px] top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2"
-            >
-              <FaChevronLeft />
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={next}
-              className="absolute right-[-20px] top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2"
-            >
-              <FaChevronRight />
-            </button>
-
-          </div>
-
+              {/* Text Content */}
+              <div className="flex-1">
+                <h3 className="font-bold text-gray-900 text-lg mb-1">{member.name}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {member.role}
+                </p>
+              </div>
+              
+              {/* Optional Read More Button matching the visual style if needed */}
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                 <button className="text-sm font-semibold text-brandIndigo hover:underline">
+                    Read more
+                 </button>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

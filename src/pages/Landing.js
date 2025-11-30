@@ -19,6 +19,9 @@ export default function Landing() {
     experience: "",
     role: "",
     expertise: "",
+    budget: "",   // Added
+    talents: "",  // Added
+    persona: "",  // Added
     notes: "",
   });
 
@@ -33,24 +36,9 @@ export default function Landing() {
     e.preventDefault();
     try {
       setLoading(true);
-
       await createSubmission(form);
-
       alert("Submission successful!");
       setLoading(false);
-
-      // Reset form
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        experience: "",
-        role: "",
-        expertise: "",
-        notes: "",
-      });
-
-      // Redirect to dashboard
       navigate("/dashboard");
     } catch (err) {
       setLoading(false);
@@ -61,21 +49,12 @@ export default function Landing() {
 
   return (
     <div className="w-full">
-
-      {/* HERO */}
       <Hero />
-
-      {/* TRUSTED COMPANIES */}
       <Companies />
-
-      {/* TEAM CAROUSEL */}
       <TeamSection />
-
-      {/* 4 STEPS SECTION */}
       <StepsSection />
 
-      {/* HIRE TALENT FORM SECTION */}
-      <section className="bg-yellow-400 py-16 mt-16">
+      <section className="bg-[#FCDC3B] py-16 mt-16">
         <div className="max-w-7xl mx-auto px-6">
 
           <h2 className="text-3xl font-bold mb-6 text-gray-900">
@@ -86,7 +65,6 @@ export default function Landing() {
             onSubmit={handleSubmit}
             className="bg-white p-8 rounded-xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-4"
           >
-            {/* INPUTS */}
             <input
               name="name"
               value={form.name}
@@ -126,7 +104,7 @@ export default function Landing() {
               name="role"
               value={form.role}
               onChange={handleChange}
-              placeholder="Role"
+              placeholder="Role (e.g. Developer)"
               className="p-3 border rounded-lg"
             />
 
@@ -138,7 +116,32 @@ export default function Landing() {
               className="p-3 border rounded-lg"
             />
 
-            {/* NOTES */}
+            {/* --- NEW FIELDS START --- */}
+            <input
+              name="budget"
+              value={form.budget}
+              onChange={handleChange}
+              placeholder="Budget (e.g. 100cr)"
+              className="p-3 border rounded-lg"
+            />
+
+            <input
+              name="talents"
+              value={form.talents}
+              onChange={handleChange}
+              placeholder="Talents (e.g. MultiTask)"
+              className="p-3 border rounded-lg"
+            />
+
+            <input
+              name="persona"
+              value={form.persona}
+              onChange={handleChange}
+              placeholder="Persona (e.g. Tech Professional)"
+              className="p-3 border rounded-lg"
+            />
+            {/* --- NEW FIELDS END --- */}
+
             <textarea
               name="notes"
               value={form.notes}
@@ -147,9 +150,7 @@ export default function Landing() {
               className="col-span-1 md:col-span-2 p-3 border rounded-lg h-28"
             />
 
-            {/* BUTTONS */}
             <div className="col-span-1 md:col-span-2 flex gap-4 mt-4">
-
               <button
                 type="submit"
                 disabled={loading}
@@ -157,29 +158,10 @@ export default function Landing() {
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  setForm({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    experience: "",
-                    role: "",
-                    expertise: "",
-                    notes: "",
-                  })
-                }
-                className="px-6 py-3 border rounded-lg bg-white text-gray-700"
-              >
-                Reset
-              </button>
             </div>
           </form>
         </div>
       </section>
-
     </div>
   );
 }

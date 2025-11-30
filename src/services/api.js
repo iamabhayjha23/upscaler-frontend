@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "https://6929b57c9d311cddf34af524.mockapi.io/submissions";
+export const API_URL = "https://6929e9609d311cddf34b9ae5.mockapi.io/submissions";
 
 export const getSubmissions = () => axios.get(API_URL);
 export const getSingleSubmission = (id) => axios.get(`${API_URL}/${id}`);

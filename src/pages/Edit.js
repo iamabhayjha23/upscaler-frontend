@@ -13,7 +13,6 @@ export default function Edit() {
     const load = async () => {
       try {
         const res = await getSingleSubmission(id);
-        console.log("EDIT LOAD:", res.data);
         setForm(res.data);
       } catch (err) {
         console.error("Error loading submission:", err);
@@ -23,9 +22,8 @@ export default function Edit() {
         setLoading(false);
       }
     };
-
     load();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -49,30 +47,20 @@ export default function Edit() {
       <h1 className="text-3xl font-bold mb-6">Edit Submission</h1>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <input
-          name="name"
-          value={form.name || ""}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        />
-        <input
-          name="email"
-          value={form.email || ""}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        />
-        <input
-          name="phone"
-          value={form.phone || ""}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        />
-        <input
-          name="role"
-          value={form.role || ""}
-          onChange={handleChange}
-          className="w-full border p-2 rounded"
-        />
+        <input name="name" value={form.name || ""} onChange={handleChange} placeholder="Name" className="w-full border p-2 rounded" />
+        <input name="email" value={form.email || ""} onChange={handleChange} placeholder="Email" className="w-full border p-2 rounded" />
+        <input name="phone" value={form.phone || ""} onChange={handleChange} placeholder="Phone" className="w-full border p-2 rounded" />
+        
+        <input name="role" value={form.role || ""} onChange={handleChange} placeholder="Role" className="w-full border p-2 rounded" />
+        <input name="experience" value={form.experience || ""} onChange={handleChange} placeholder="Experience" className="w-full border p-2 rounded" />
+        <input name="expertise" value={form.expertise || ""} onChange={handleChange} placeholder="Expertise" className="w-full border p-2 rounded" />
+        
+        {/* New Fields */}
+        <input name="budget" value={form.budget || ""} onChange={handleChange} placeholder="Budget" className="w-full border p-2 rounded" />
+        <input name="talents" value={form.talents || ""} onChange={handleChange} placeholder="Talents" className="w-full border p-2 rounded" />
+        <input name="persona" value={form.persona || ""} onChange={handleChange} placeholder="Persona" className="w-full border p-2 rounded" />
+        
+        <textarea name="notes" value={form.notes || ""} onChange={handleChange} placeholder="Notes" className="w-full border p-2 rounded h-24" />
 
         <button className="bg-blue-600 text-white px-4 py-2 rounded">
           Save Changes
